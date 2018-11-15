@@ -1,0 +1,11 @@
+{
+  "lambda": {
+    "role": "od-sls-ethauth-executor",
+    "name": "od-sls-ethauth",
+    "region": "us-east-1"
+  },
+  "api": {
+    "id": "w65t9a9h3f",
+    "module": "index"
+  }
+}
