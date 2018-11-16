@@ -21,9 +21,7 @@ function userExists(userid){
 	};
 
 	// post-process dynamo result before returning
-	return dynamoDb.get(params).promise().then(function (response) {
-		return response.Item;
-	});
+	return dynamoDb.get(params).promise();
 }
 
 function verifyToken(userid, token) {
@@ -73,10 +71,19 @@ api.post('/ethauths', function (request) {
 }, { error: 400 }, { success: 201 }); // returns HTTP status 201 - Created if successful
 
 // check if token is valid for user
-api.post('/ethauths/user', function (request) { 
+api.post('/ethauths/user', async function (request) { 
     const userid = request.body.userId;
-    const token = request.body.token;
+    let token = request.body.token;
     let isValid = false
+
+    await userExists(userid).then(function (response) {
+        let user = response.Item;
+        
+        if(user === undefined) {
+            throw "user not registarted"
+        }
+    });
+    
 
     isValid = verifyToken(userid, token);
     if(isValid){
