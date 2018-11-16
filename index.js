@@ -28,13 +28,13 @@ function userExists(userid){
 
 function verifyToken(userid, token) {
     'use strict';
+    var isUser;
     return jwt.verify(token, messages.jwt, function(err, decoded) {
         if (err) { 
             throw 'Failed to authenticate token.'
         }
         else {
-            userid = decoded.user;
-            return true;
+            return userid === decoded.user;
         };
     });
   }
@@ -78,7 +78,7 @@ api.post('/ethauths/user', function (request) {
     const token = request.body.token;
     let isValid = false
 
-    isValid = verifytoken(userid, token);
+    isValid = verifyToken(userid, token);
     if(isValid){
         // refresh token
         token = jwt.sign({user: userid}, messages.jwt,  { expiresIn: "1d" });
