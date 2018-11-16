@@ -12,8 +12,11 @@ get message to sign
 #### POST /ethauths 
 when token is invalid or does not exist create a new token, return token
 
+#### POST /ismember
+return true or false if member of dolo
+
 * userid
-* signature
+* token
 
 ## examples
 
