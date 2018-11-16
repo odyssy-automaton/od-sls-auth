@@ -1,3 +1,30 @@
+## endpoints
+
+#### POST /ethauths/user 
+check if users token is valid if it is refresh the token, return token
+
+* userid
+* token
+
+#### GET /ethauths/message
+get message to sign
+
+#### POST /ethauths 
+when token is invalid or does not exist create a new token, return token
+
+* userid
+* signature
+
+## examples
+
+```bash
+curl -H "Content-Type: application/json" -X POST -d '{"userId":"0xCedEEcB8438977Dda9f095dFc664422cB32007A1", "signature":"0x30755ed65396facf86c53e6217c52b4daebe72aa4941d89635409de4c9c7f9466d4e9aaec7977f05e923889b33c0d0dd27d7226b6e6f56ce737465c5cfd04be400"}' https://w65t9a9h3f.execute-api.us-east-1.amazonaws.com/latest/ethauths
+```
+
+```bash
+curl -H "Content-Type: application/json" -X POST -d '{"userId":"0xCedEEcB8438977Dda9f095dFc664422cB32007A1", "token":"0x30755ed65396facf86c53e6217c52b4daebe72aa4941d89635409de4c9c7f9466d4e9aaec7977f05e923889b33c0d0dd27d7226b6e6f56ce737465c5cfd04be400"}' https://w65t9a9h3f.execute-api.us-east-1.amazonaws.com/latest/ethauths/user
+```
+
 ## notes
 
 aws dynamodb create-table --table-name ethauths \
