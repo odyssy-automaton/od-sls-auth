@@ -55,7 +55,7 @@ api.post('/ethauths', function (request) {
 
     // check web3 signature
     // if valid return new token
-    isValid = verifyWeb3(signature, message.web3, userid);
+    isValid = verifyWeb3(signature, messages.web3, userid);
     if(isValid){
         var token = jwt.sign({user: userid}, messages.jwt,  { expiresIn: "1d" });
         var params = {  
